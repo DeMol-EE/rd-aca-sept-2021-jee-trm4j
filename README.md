@@ -45,31 +45,6 @@ As a final hurdle, protect yourself versus concurrency issues.
 (If you do a double submit by clicking really fast, or just add a small delay (e.g., using Thread.sleep) in the service to add a time registration to a project, you might be able to enter time registrations totalling more hours than are available for a project.
 This can only be prevented by proper concurrency management, either on the database (transaction isolation) or on the application (locking) level.
 
-## H2
-
-### Maven
-
-```xml
-<dependency>
-    <groupId>com.h2database</groupId>
-    <artifactId>h2</artifactId>
-    <version>1.4.200</version>
-    <scope>test</scope>
-</dependency>
-```
-
-### JDBC information
-
-http://www.h2database.com/html/tutorial.html#connecting_using_jdbc
-
-Driver:
-
-    org.h2.Driver
-
-Connection string:
-
-    jdbc:h2:mem:trm4j;DB_CLOSE_DELAY=-1
-
 ## MySQL
 
 ### Docker
@@ -135,51 +110,3 @@ Add this to `web.xml`:
 ### Possible GUIs
 
 * https://dbeaver.io/download/
-
-## Checklist
-
-### JPA
-
-- Project
-- Time registration
-- (do NOT try to apply DDD, it does NOT work well with BV)
-- TRM service
-- unit tests (seems useless, perhaps just to check that "available hours" works correctly)
-- add JPA mapping
-- add DAOs (seems also rather useless, easier if fetching is done through single entity manager in TRM service...)
-- integration test (mysql, drop-and-create, manual transaction)
-- prepare for real deploy
-  - real persistence xml
-  - (?) data-source in web xml (or annotation?) -> check if we can inject password through maven system props
-  - second mysql container
-  - flyway scripts!!
-    - migrations go under `/src/main/resources/db/migration` (default location: `classpath:db/migration`)
-    - run on deploy with @WebListener (servlet context, inject datasource as resource)
-
-### JSF
-
-- Facelet
-- Model
-- Projects page
-- New project page/form
-- Merge into one + ajaxify (maybe later?)
-- Project detail page
-- Time registration ("the calendar")
-  - Passthrough for localdate (inputText + convertDateTime)/number
-  - (?) converter for projectId -> project in selectOne? alternatively, copy projectId in bean
-- CSS -> under /src/main/webapp/resources
-- i18n (bundle + language selector) -> under /src/main/resources
-- bean validation
-- security (form (under web-inf?) or custom form?)
-- tx: double submit to try to register too many hours (add version to project? otherwise pessimistic (write) lock on project)
-  - easy to emulate with thread sleep in service (within tx)
-  - break even if you have proper bean validation (why? tx isolation level)
-    - @version? not enough, since project entity is not modified when inserting a TR...
-    - add OPTIMISTIC_FORCE_INCREMENT
-
-  ```xml
-    <context-param>
-        <param-name>javax.faces.PROJECT_STAGE</param-name>
-        <param-value>Development</param-value>
-    </context-param>
-- ```

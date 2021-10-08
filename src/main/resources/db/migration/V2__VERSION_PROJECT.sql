@@ -1,0 +1,1 @@
+alter table PROJECT add version integer default 1;

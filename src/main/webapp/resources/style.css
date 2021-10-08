@@ -1,0 +1,60 @@
+body {
+    background-color: white;
+    font-family: sans-serif;
+    margin: 0;
+    padding: 1em;
+    border: darkblue solid 10px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+header h1 {
+    font-weight: lighter
+}
+
+header nav ul {
+    display: flex;
+    justify-content: space-around;
+    gap: 1em;
+}
+
+nav ul {
+    list-style-type: none;
+}
+
+footer, header {
+    background-color: white;
+    color: darkblue;
+}
+
+footer {
+    color: gray;
+}
+
+a {
+    color: red;
+}
+
+section {
+    display: grid;
+    grid-template-columns: 1fr 2fr 4fr;
+}
+
+#cal {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-auto-rows: 70px;
+}
+
+.day {
+    display: flex;
+    flex-direction: column;
+}
+
+.date {
+    font-size: smaller;
+}

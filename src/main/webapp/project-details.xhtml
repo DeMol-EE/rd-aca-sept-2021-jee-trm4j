@@ -1,0 +1,30 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/WEB-INF/templates/master.xhtml">
+    <ui:define name="metadata">
+        <f:metadata>
+            <f:viewParam name="id" value="#{projectDetailsBean.project}" required="true"/>
+        </f:metadata>
+    </ui:define>
+    <ui:define name="content">
+        <h4>#{projectDetailsBean.project.title}</h4>
+        <h:dataTable id="table" value="#{projectDetailsBean.project.registrations}" var="reg">
+            <h:column>
+                <f:facet name="header">Date</f:facet>
+                <h:outputLabel value="#{reg.date}">
+                    <f:convertDateTime type="localDate"/>
+                </h:outputLabel>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Hours</f:facet>
+                #{reg.hours}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Consultant</f:facet>
+                #{reg.consultant}
+            </h:column>
+        </h:dataTable>
+    </ui:define>
+</ui:composition>

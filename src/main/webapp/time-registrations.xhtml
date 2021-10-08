@@ -1,0 +1,61 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+                template="/WEB-INF/templates/master.xhtml">
+    <ui:define name="content">
+        <h4>#{timeRegistrationBean.yearMonth}</h4>
+        <article id="cal">
+            <ui:repeat value="#{timeRegistrationBean.daysOfMonth}" var="date">
+                <h:panelGroup styleClass="day"
+                              style="grid-column-start:#{date.dayOfWeek.value}">
+                    <h:outputText value="#{date}"
+                                  styleClass="date">
+                        <f:convertDateTime type="localDate" pattern="dd/MM/yyyy"/>
+                    </h:outputText>
+                    <ui:repeat value="#{timeRegistrationBean.getTimeRegistrationsForDate(date)}" var="tr">
+                        <span>h: #{tr.hours} (p: #{tr.project.id})</span>
+                    </ui:repeat>
+                </h:panelGroup>
+            </ui:repeat>
+        </article>
+        <h:form rendered="#{timeRegistrationBean.projects.size > 0}">
+            <fieldset>
+                <legend>New time registration</legend>
+                <section>
+                    <h:outputLabel for="project" value="Project"/>
+                    <h:selectOneMenu id="project" value="#{timeRegistrationBean.projectId}">
+                        <f:selectItems value="#{timeRegistrationBean.projects}"
+                                       var="project"
+                                       itemValue="#{project.id}"
+                                       itemLabel="#{project.id}"/>
+                    </h:selectOneMenu>
+                    <h:message for="project"/>
+                </section>
+                <section>
+                    <h:outputLabel for="date" value="Date"/>
+                    <h:inputText id="date"
+                                 a:type="date"
+                                 value="#{timeRegistrationBean.timeRegistration.date}">
+                        <f:convertDateTime type="localDate" pattern="yyyy-MM-dd"/>
+                    </h:inputText>
+                    <h:message for="date"/>
+                </section>
+                <section>
+                    <h:outputLabel for="hours" value="hours"/>
+                    <h:inputText id="hours"
+                                 a:type="number"
+                                 a:step="1"
+                                 a:min="1"
+                                 value="#{timeRegistrationBean.timeRegistration.hours}"/>
+                    <h:message for="hours"/>
+                </section>
+                <footer>
+                    <h:commandButton value="Submit" action="#{timeRegistrationBean.register}"/>
+                    <h:messages globalOnly="true"/>
+                </footer>
+            </fieldset>
+        </h:form>
+    </ui:define>
+</ui:composition>

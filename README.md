@@ -74,10 +74,6 @@ Driver:
 
     com.mysql.cj.jdbc.Driver
 
-Connection string:
-
-    jdbc:mysql://localhost:3333/trm4j
-
 ### Glassfish setup
 
 https://blog.payara.fish/using-mysql-with-payara

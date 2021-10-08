@@ -91,9 +91,9 @@ Add this to `web.xml`:
 
 ```xml
 <data-source>
-    <name>java:global/ds/trm4j</name>
+    <name>java:app/ds/trm4j</name>
     <class-name>com.mysql.cj.jdbc.Driver</class-name>
-    <url>jdbc:mysql://127.0.0.1:3306/trm4j</url>
+    <url>jdbc:mysql://localhost:3306/trm4j</url>
     <user>acaddemicts</user>
     <password>acaddemicts</password>
     <property>

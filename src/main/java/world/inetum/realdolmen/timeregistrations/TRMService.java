@@ -47,6 +47,8 @@ public class TRMService {
             long projectId,
             TimeRegistration timeRegistration
     ) {
+//        entityManager.find(Project.class, projectId)
+//                .addRegistration(timeRegistration);
         entityManager.find(Project.class, projectId, LockModeType.OPTIMISTIC_FORCE_INCREMENT)
                 .addRegistration(timeRegistration);
         try {

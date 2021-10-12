@@ -20,7 +20,7 @@
                 </h:panelGroup>
             </ui:repeat>
         </article>
-        <h:form rendered="#{timeRegistrationBean.projects.size > 0}">
+        <h:form rendered="#{timeRegistrationBean.projects.size() > 0}">
             <fieldset>
                 <legend>New time registration</legend>
                 <section>

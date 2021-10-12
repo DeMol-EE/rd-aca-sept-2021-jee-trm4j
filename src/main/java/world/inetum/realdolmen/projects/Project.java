@@ -16,14 +16,18 @@ import java.util.Set;
 public class Project implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+    @Column(name = "title")
     private String title;
     @Positive
     @NotNull
+    @Column(name = "hours")
     private Integer hours;
     @OneToMany(mappedBy = "project", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<TimeRegistration> registrations = new HashSet<>();
     @Version
+    @Column(name = "version")
     private Long version = 0L;
 
     public Project() {

@@ -19,7 +19,7 @@ import java.util.Set;
 @DataSourceDefinition(
         name = "java:app/jdbc/trm4j",
         className = "com.mysql.cj.jdbc.Driver",
-        url = "jdbc:mysql://trm4j_db:3306/trm4j",
+        url = "jdbc:mysql://localhost:3304/trm4j",
         user = "acaddemicts",
         password = "acaddemicts",
         properties = {

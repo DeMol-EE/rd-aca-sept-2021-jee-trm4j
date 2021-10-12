@@ -14,16 +14,21 @@ import java.time.LocalDate;
 public class TimeRegistration implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
     @ManyToOne(fetch = FetchType.LAZY)
     @NotNull
+    @JoinColumn(name = "project_id")
     private Project project;
     @NotNull
+    @Column(name = "d")
     private LocalDate date = LocalDate.now();
     @Positive
     @NotNull
+    @Column(name = "hours")
     private Integer hours = 8;
     @NotBlank
+    @Column(name = "consultant")
     private String consultant;
 
     public Long getId() {
